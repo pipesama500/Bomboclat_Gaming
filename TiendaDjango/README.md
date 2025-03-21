@@ -6,7 +6,8 @@
 ## Como ejecutar el proyecto
 1. **Clonar el repositorio**
 ```
-git clone https:https://github.com/pipesama500/Bomboclat_Gaming.git
+git clone https://github.com/pipesama500/Bomboclat_Gaming.git
+cd Bomboclat_Gaming
 cd TiendaDjango
 ```
 2. **Configurar las migracionas**
