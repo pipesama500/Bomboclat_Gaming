@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}🛒 Mi Carrito - Tienda Gamer{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">🛒 Mi Carrito</h2>
+
+    {% if items %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.producto.nombre }}</td>
+                    <td>{{ item.cantidad }}</td>
+                    <td>${{ item.producto.precio }}</td>
+                    <td>${{ item.subtotal }}</td>
+                    <td>
+                        <a href="{% url 'eliminar_del_carrito' item.producto.id %}" class="btn btn-danger btn-sm">🗑 Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'vaciar_carrito' %}" class="btn btn-danger mt-3">🗑 Vaciar Carrito</a>
+        <a href="{% url 'finalizar_compra' %}" class="btn btn-success mt-3">💳 Finalizar Compra</a>
+        <h4 class="text-end">Total: ${{ total }}</h4>
+    {% else %}
+        <p class="text-center text-muted">Tu carrito está vacío.</p>
+    {% endif %}
+
+    <a href="{% url 'home' %}" class="btn btn-primary">🔙 Seguir Comprando</a>
+</div>
+{% endblock %}

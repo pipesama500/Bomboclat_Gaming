@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{% if producto %}Editar {{ producto.nombre }}{% else %}Crear Producto{% endif %}{% endblock %}
+
+{% block content %}
+<h2>{% if producto %}✏️ Editar Producto{% else %}➕ Crear Producto{% endif %}</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success mt-2">
+        {% if producto %}Actualizar{% else %}Guardar{% endif %}
+    </button>
+</form>
+<a href="{% url 'admin_productos' %}" class="btn btn-secondary mt-2">Volver a Gestión de Productos</a>
+{% endblock %}

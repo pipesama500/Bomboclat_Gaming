@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}📦 Gestión de Pedidos - Admin{% endblock %}
+
+{% block content %}
+<h2>📦 Gestión de Pedidos</h2>
+
+<!-- Resumen de estados -->
+<div class="mb-3">
+    <p><strong>Pedidos Pendientes:</strong> {{ pendientes }}</p>
+    <p><strong>Pedidos Enviados:</strong> {{ enviados }}</p>
+    <p><strong>Pedidos Finalizados:</strong> {{ finalizados }}</p>
+</div>
+
+<!-- Filtros de Estado -->
+<form method="get" class="mb-3 d-flex gap-2">
+    <select name="estado" class="form-select">
+        <option value="">Todos los Estados</option>
+        <option value="Pendiente" {% if estado_filtro == 'Pendiente' %}selected{% endif %}>Pendiente</option>
+        <option value="Enviado" {% if estado_filtro == 'Enviado' %}selected{% endif %}>Enviado</option>
+        <option value="Finalizado" {% if estado_filtro == 'Finalizado' %}selected{% endif %}>Finalizado</option>
+    </select>
+    <button type="submit" class="btn btn-primary">Filtrar</button>
+    <a href="{% url 'admin_pedidos' %}" class="btn btn-secondary">Limpiar</a>
+</form>
+
+<!-- Tabla de Pedidos -->
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>Total</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+    {% for pedido in pedidos %}
+    <tr>
+        <td>{{ pedido.id }}</td>
+        <td>{{ pedido.usuario.username }}</td>
+        <td>${{ pedido.total }}</td>
+        <td>{{ pedido.estado }}</td>
+        <td>
+            {% if pedido.estado != 'Finalizado' %}
+            <a href="{% url 'actualizar_estado' pedido.id %}" class="btn btn-warning">Actualizar Estado</a>
+            {% else %}
+            <span class="badge bg-secondary">Finalizado</span>
+            {% endif %}
+        </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5">No hay pedidos para mostrar.</td></tr>
+    {% endfor %}
+</table>
+
+<a href="{% url 'home' %}" class="btn btn-secondary">Volver a Inicio</a>
+{% endblock %}

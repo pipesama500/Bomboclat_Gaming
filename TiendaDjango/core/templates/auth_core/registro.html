@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Registro - Tienda Gamer{% endblock %}
+
+{% block content %}
+<h2>📝 Registro de Usuario</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success mt-2">Registrarse</button>
+</form>
+<p>¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a></p>
+{% endblock %}

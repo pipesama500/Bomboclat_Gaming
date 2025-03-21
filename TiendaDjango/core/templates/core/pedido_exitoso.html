@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}✅ Compra Exitosa{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+    <h2>✅ ¡Compra Realizada con Éxito!</h2>
+    <p>Gracias por tu compra. Tu pedido <strong>#{{ pedido.id }}</strong> ha sido registrado.</p>
+    <a href="{% url 'generar_factura_pdf' pedido.id %}" class="btn btn-primary"> Descargar Factura en PDF </a> <br> <br>
+    <a href="{% url 'home' %}" class="btn btn-primary">🏠 Volver a Inicio</a>
+</div>
+{% endblock %}

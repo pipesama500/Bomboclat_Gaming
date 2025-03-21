@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}🏠 Productos Disponibles{% endblock %}
+
+{% block content %}
+<h2>🏠 Productos Disponibles</h2>
+
+<!-- Formulario de Filtros y Búsqueda -->
+<form method="get" class="mb-3 d-flex gap-2">
+    <!-- Filtro por Categoría -->
+    <select name="categoria" class="form-select">
+        <option value="">Todas las Categorías</option>
+        {% for categoria in categorias %}
+            <option value="{{ categoria.id }}" {% if request.GET.categoria == categoria.id|stringformat:"s" %}selected{% endif %}>
+                {{ categoria.nombre }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <!-- Búsqueda por Nombre -->
+    <input type="text" name="buscar" class="form-control" placeholder="Buscar por nombre" value="{{ request.GET.buscar }}">
+
+    <button type="submit" class="btn btn-primary">Filtrar</button>
+    <a href="{% url 'home' %}" class="btn btn-secondary">Limpiar</a>
+</form>
+
+<!-- Listado de Productos -->
+<div class="row">
+    {% for producto in productos %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ producto.nombre }}</h5>
+                <p class="card-text">Precio: ${{ producto.precio }}</p>
+                <p class="card-text">Stock: {{ producto.stock }}</p>
+                <a href="{% url 'producto_detalle' producto.id %}" class="btn btn-info">Ver Detalle</a>
+                <a href="{% url 'agregar_al_carrito' producto.id %}" class="btn btn-success">Agregar al Carrito</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>No hay productos disponibles con los criterios seleccionados.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}
