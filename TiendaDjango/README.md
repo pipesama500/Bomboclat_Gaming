@@ -25,7 +25,13 @@ python manage.py runserver
 ```
 5. **Acceder a la app**  
 Accede a la app en: http://127.0.0.1:8000/
-### Rutas principales
+## Credenciales de prueba  
+- Usuario administrador  
+  -  Usuario: admin
+  -  Contraseña: pipelon1234
+- Cliente 
+  -  Usuario: casoprueba
+  -  Contraseña: contraseña12345
 ## Rutas Principales de la Aplicación
 
 | Funcionalidad               | Ruta                                    | Descripción                                        |
@@ -39,11 +45,3 @@ Accede a la app en: http://127.0.0.1:8000/
 | Gestión de Productos (Admin)| `/admin-core/gestion-productos/`        | Administración de productos.                       |
 | Gestión de Pedidos (Admin)  | `/admin-core/gestion-pedidos/`          | Administración y control de pedidos.               |
 | Panel de Administración     | `/admin/`                               | Panel de administración predeterminado de Django.  |  
-
-## Credenciales de prueba  
-- Usuario administrador  
-  -  Usuario: admin
-  -  Contraseña: pipelon1234
-- Cliente 
-  -  Usuario: casoprueba
-  -  Contraseña: contraseña12345
