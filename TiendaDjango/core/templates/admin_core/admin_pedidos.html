@@ -4,14 +4,12 @@
 {% block content %}
 <h2>📦 Gestión de Pedidos</h2>
 
-<!-- Resumen de estados -->
 <div class="mb-3">
     <p><strong>Pedidos Pendientes:</strong> {{ pendientes }}</p>
     <p><strong>Pedidos Enviados:</strong> {{ enviados }}</p>
     <p><strong>Pedidos Finalizados:</strong> {{ finalizados }}</p>
 </div>
 
-<!-- Filtros de Estado -->
 <form method="get" class="mb-3 d-flex gap-2">
     <select name="estado" class="form-select">
         <option value="">Todos los Estados</option>
@@ -23,7 +21,6 @@
     <a href="{% url 'admin_pedidos' %}" class="btn btn-secondary">Limpiar</a>
 </form>
 
-<!-- Tabla de Pedidos -->
 <table class="table table-striped">
     <tr>
         <th>ID</th>
