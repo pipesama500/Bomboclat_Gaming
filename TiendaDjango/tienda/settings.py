@@ -132,3 +132,6 @@ LOGOUT_REDIRECT_URL = 'home'
 
 # Configuración de autenticación para iniciar sesión
 LOGIN_URL = 'login'
+
+MEDIA_URL  = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
