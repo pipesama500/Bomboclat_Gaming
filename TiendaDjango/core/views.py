@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Q
-from django.http import FileResponse
+from django.http import FileResponse, JsonResponse
 from django.utils.translation import gettext_lazy as _
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
@@ -309,3 +309,23 @@ def eliminar_producto(request, producto_id):
     producto = Producto.objects.get(id=producto_id)
     producto.delete()
     return redirect('admin_productos')
+
+def productos_json(request):
+    """
+    Servicio web que devuelve un JSON con todos los productos
+    cuyo stock > 0, e incluye un campo 'url' apuntando
+    a la vista de detalle de cada producto.
+    """
+    qs = Producto.objects.filter(stock__gt=0)
+    data = []
+    for p in qs:
+        data.append({
+            'id':      p.id,
+            'nombre':  p.nombre,
+            'precio':  float(p.precio),  # o str(p.precio) si prefieres texto
+            'stock':   p.stock,
+            'url':     request.build_absolute_uri(
+                           reverse('producto_detalle', args=[p.id])
+                       )
+        })
+    return JsonResponse({'productos': data})

@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from core.views import productos_json
 
 urlpatterns = [
 
@@ -29,5 +30,7 @@ urlpatterns = [
     path('admin-core/crear-producto/', views.crear_producto, name='crear_producto'),
     path('admin-core/editar-producto/<int:producto_id>/', views.editar_producto, name='editar_producto'),
     path('admin-core/eliminar-producto/<int:producto_id>/', views.eliminar_producto, name='eliminar_producto'),
+
+    path('api/productos/', productos_json, name='productos_json'),
 ]
 
