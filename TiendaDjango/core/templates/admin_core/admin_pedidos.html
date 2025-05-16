@@ -30,6 +30,7 @@
         <th>Cliente</th>
         <th>Total</th>
         <th>Estado</th>
+        <th>Dirección</th>
         <th>Acciones</th>
     </tr>
     {% for pedido in pedidos %}
@@ -38,6 +39,36 @@
         <td>{{ pedido.usuario.username }}</td>
         <td>${{ pedido.total }}</td>
         <td>{{ pedido.estado }}</td>
+        <td>
+        {% if pedido.metodo_envio == 'Domicilio' %}
+          <button type="button"
+                  class="btn btn-sm btn-info"
+                  data-bs-toggle="modal"
+                  data-bs-target="#direccionModal{{ pedido.id }}">
+            Ver dirección
+          </button>
+
+          <!-- Modal Bootstrap 5 -->
+          <div class="modal fade" id="direccionModal{{ pedido.id }}" tabindex="-1" aria-labelledby="direccionModalLabel{{ pedido.id }}" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="direccionModalLabel{{ pedido.id }}">Dirección de envío</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                  {{ pedido.direccion_envio }}
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% else %}
+          Tienda
+        {% endif %}
+        </td>
         <td>
             {% if pedido.estado != 'Finalizado' %}
             <a href="{% url 'actualizar_estado' pedido.id %}" class="btn btn-warning">Actualizar Estado</a>
