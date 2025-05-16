@@ -7,6 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Q
 from django.http import FileResponse
+from django.utils.translation import gettext_lazy as _
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from .models import Producto, Carrito, CarritoProducto, Pedido, DetallePedido, Categoria
@@ -125,15 +126,22 @@ def generar_factura_pdf(request, pedido_id):
     # Creamos el lienzo del PDF
     c = canvas.Canvas(buffer, pagesize=A4)
     c.setFont("Helvetica", 12)
-    c.drawString(100, 800, f"Factura del Pedido #{pedido.id}")
-    c.drawString(100, 780, f"Fecha de creación: {pedido.fecha.strftime('%Y-%m-%d')}")
-    c.drawString(100, 760, f"Estado del Pedido: {pedido.estado}")
+    # marcamos las partes estáticas para traducción y combinamos con dinámicos
+    titulo = _("Factura del Pedido")
+    fecha_lbl = _("Fecha de creación")
+    estado_lbl = _("Estado del Pedido")
+
+    c.drawString(100, 800, f"{titulo} #{pedido.id}")
+    c.drawString(100, 780, f"{fecha_lbl}: {pedido.fecha.strftime('%Y-%m-%d')}")
+    c.drawString(100, 760, f"{estado_lbl}: {pedido.estado}")
 
     y = 720
-    c.drawString(100, y, "Detalles de los Productos:")
+    detalle_lbl = _("Detalles de los Productos")
+    c.drawString(100, y, f"{detalle_lbl}:")    
     y -= 20
     c.drawString(100, y, "Producto      | Cantidad | Precio Unitario | Subtotal")
-    c.line(100, y - 5, 500, y - 5)  # Línea separadora
+    cabecera = _("Producto      | Cantidad | Precio Unitario | Subtotal")
+    c.drawString(100, y, cabecera)    
     y -= 20
 
     total = 0
@@ -147,7 +155,8 @@ def generar_factura_pdf(request, pedido_id):
         c.drawString(100, y, f"{producto} | {cantidad} | ${precio:.2f} | ${subtotal:.2f}")
         y -= 20
 
-    c.drawString(100, y - 20, f"Total a Pagar: ${total:.2f}")
+    total_lbl = _("Total a Pagar")
+    c.drawString(100, y - 20, f"{total_lbl}: ${total:.2f}")    
     c.showPage()
     c.save()
 
@@ -276,16 +285,24 @@ def crear_producto(request):
 
 @staff_member_required
 def editar_producto(request, producto_id):
-    producto = Producto.objects.get(id=producto_id)
+    # 1) Traigo el producto o 404
+    producto = get_object_or_404(Producto, id=producto_id)
+
     if request.method == 'POST':
-        form = ProductoForm(request.POST, instance=producto)
+        # 2) Incluyo request.FILES para procesar el ImageField
+        form = ProductoForm(request.POST, request.FILES, instance=producto)
         if form.is_valid():
             form.save()
             return redirect('admin_productos')
     else:
         form = ProductoForm(instance=producto)
 
-    return render(request, 'admin_core/editar_producto.html', {'form': form, 'producto': producto})
+    return render(request,
+                  'admin_core/editar_producto.html',
+                  {
+                      'form': form,
+                      'producto': producto,
+                  })
 
 @staff_member_required
 def eliminar_producto(request, producto_id):

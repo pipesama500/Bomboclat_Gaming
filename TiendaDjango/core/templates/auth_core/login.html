@@ -1,15 +1,16 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}Iniciar Sesión{% endblock %}
+{% block title %}{% trans "Iniciar Sesión" %}{% endblock %}
 
 {% block content %}
 <div class="container">
-    <h2>🔑 Iniciar Sesión</h2>
+    <h2>🔑 {% trans "Iniciar Sesión" %}</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+        <button type="submit" class="btn btn-primary">{% trans "Iniciar Sesión" %}</button>
     </form>
-    <p>¿No tienes cuenta? <a href="{% url 'registro' %}">Regístrate aquí</a></p>
+    <p>{% trans "¿No tienes cuenta?" %} <a href="{% url 'registro' %}">{% trans "Regístrate aquí" %}</a></p>
 </div>
 {% endblock %}
