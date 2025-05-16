@@ -2,76 +2,67 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Tienda Gamer{% endblock %}</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Tienda Gamer{% endblock %}</title>
+  <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
 </head>
 <body>
-    {% load static %}
-    <!-- Navbar estilizada -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-        <div class="container">
-            <!-- Logo y Nombre de la Tienda -->
-            <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
-                <img src="{% static 'images/logo.png' %}" alt="Logo" style="height: 40px; margin-right: 10px;">
-                Bomboclat Gaming
-            </a>
-    
-            <!-- Botón para colapsar en dispositivos pequeños -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-    
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}">🏠 Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'ver_carrito' %}">🛒 Carrito</a>
-                    </li>
-    
-                    {% if user.is_staff %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'admin_pedidos' %}">📦 Gestión de Pedidos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'admin_productos' %}">🎮 Gestión de Productos</a>
-                    </li>
-                    {% endif %}
-    
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'mis_pedidos' %}">📝 Mis Pedidos</a>
-                    </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">🔓 Cerrar Sesión</a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}">🔑 Iniciar Sesión</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'registro' %}">📝 Registrarse</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-    </nav>
-    
+  {% load static %}
 
-    <main class="container mt-4">
-        {% block content %}{% endblock %}
-    </main>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+        <img src="{% static 'images/logo.png' %}" alt="Logo" style="height:40px; margin-right:8px;">
+        Bomboclat Gaming
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">🏠 Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'ver_carrito' %}">🛒 Carrito</a></li>
+          {% if user.is_staff %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'admin_pedidos' %}">📦 Gestión de Pedidos</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'admin_productos' %}">🎮 Gestión de Productos</a></li>
+          {% endif %}
+          {% if user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'mis_pedidos' %}">📝 Mis Pedidos</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">🔓 Cerrar Sesión</a></li>
+          {% else %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">🔑 Iniciar Sesión</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'registro' %}">📝 Registrarse</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-    <footer class="text-center mt-4 py-3 bg-light">
-        <p>© 2025 Universidad Eafit - Felipe Martinez y Juan Pablo Mejia</p>
-    </footer>
+  <!-- FRASE DEL DÍA -->
+  {% if daily_quote.text %}
+  <div class="alert alert-light text-center mb-0">
+    <p class="mb-0">“{{ daily_quote.text }}”</p>
+    {% if daily_quote.author %}
+      <small class="text-muted d-block mt-2">— {{ daily_quote.author }}</small>
+    {% endif %}
+  </div>
+{% endif %}
 
-    <!-- Bootstrap JS (para la funcionalidad del menú desplegable) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- CONTENIDO -->
+  <main class="container mt-4">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="text-center mt-4 py-3 bg-light">
+    <p>© 2025 Universidad Eafit – Felipe Martínez y Juan Pablo Mejía</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
