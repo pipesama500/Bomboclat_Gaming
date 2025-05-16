@@ -80,8 +80,12 @@ WSGI_APPLICATION = 'tienda.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME':   os.getenv('DB_NAME', BASE_DIR / 'db.sqlite3'),
+        'USER':   os.getenv('DB_USER', ''),
+        'PASSWORD': os.getenv('DB_PASSWORD', ''),
+        'HOST':   os.getenv('DB_HOST', ''),
+        'PORT':   os.getenv('DB_PORT', ''),
     }
 }
 
@@ -129,6 +133,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 

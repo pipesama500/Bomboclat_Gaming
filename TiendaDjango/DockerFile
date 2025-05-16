@@ -1,28 +1,30 @@
 # Dockerfile
 
-# 1) Parte base: Python ligero
+# Base image
+
 FROM python:3.11-slim
 
-# 2) Variables para que Python no genere archivos .pyc y haga flush al stdout
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+# Environment variables
 
-# 3) Directorio de trabajo
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+
+# Set working directory
+
 WORKDIR /app
 
-# 4) Copia e instala dependencias
+# Install dependencies
+
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 5) Copia el resto del código
+# Copy project files
+
 COPY . /app/
 
-# 6) Expón el puerto que usará Gunicorn
+# Expose port
+
 EXPOSE 8000
 
-# 7) Comando por defecto: migraciones, static y Gunicorn
-ENTRYPOINT ["/bin/sh", "-c", "\
-    python manage.py migrate && \
-    python manage.py collectstatic --noinput && \
-    gunicorn tienda.wsgi:application --bind 0.0.0.0:8000 \
-"]
+# Default command: apply migrations, collect static files, then start Gunicorn
+
+CMD python manage.py migrate && python manage.py collectstatic --noinput && gunicorn tienda.wsgi\:application --bind 0.0.0.0:8000
