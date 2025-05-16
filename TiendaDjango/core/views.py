@@ -1,15 +1,16 @@
 import io
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Q
 from django.http import FileResponse
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from .models import Producto, Carrito, CarritoProducto, Pedido, DetallePedido, Categoria
-from .forms import ProductoForm
+from .forms import ProductoForm, CustomUserCreationForm, AddressForm
 
 def home(request):
     categoria_id = request.GET.get('categoria')  # Filtrar por categoría
@@ -74,23 +75,39 @@ def vaciar_carrito(request):
 @login_required
 def finalizar_compra(request):
     carrito = Carrito.objects.get(usuario=request.user)
-    items = carrito.carritoproducto_set.all()
+    items   = carrito.carritoproducto_set.all()
 
     if not items:
         return redirect('ver_carrito')
 
-    pedido = Pedido.objects.create(usuario=request.user, total=carrito.calcular_total())
+    if request.method == 'POST':
+       metodo_envio = request.POST.get('metodo_envio')
+       perfil       = request.user.profile
+       # Si elige domicilio pero no tiene dirección, forzamos actualizar primero
+       if metodo_envio == 'Domicilio' and not perfil.direccion:
+           return redirect(f"{reverse('actualizar_direccion')}?next=finalizar_compra")
 
-    for item in items:
-        DetallePedido.objects.create(
-            pedido=pedido,
-            producto=item.producto,
-            cantidad=item.cantidad,
-            subtotal=item.subtotal()
-        )
+       direccion_envio = perfil.direccion if metodo_envio == 'Domicilio' else ''
+       pedido = Pedido.objects.create(
+           usuario=request.user,
+           total=carrito.calcular_total(),
+           metodo_envio=metodo_envio,
+           direccion_envio=direccion_envio
+       )
 
-    carrito.carritoproducto_set.all().delete()  # Vacía el carrito después de comprar
-    return redirect('pedido_exitoso', pedido.id)
+       for item in items:
+           DetallePedido.objects.create(
+               pedido   = pedido,
+               producto = item.producto,
+               cantidad = item.cantidad,
+               subtotal = item.subtotal()
+           )
+
+       carrito.carritoproducto_set.all().delete()
+       return redirect('pedido_exitoso', pedido.id)
+
+    # Si no es POST, devolvemos al carrito
+    return redirect('ver_carrito')
 
 @login_required
 def pedido_exitoso(request, pedido_id):
@@ -169,15 +186,32 @@ def logout_view(request):
 
 def registro_view(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             usuario = form.save()  # Guarda el usuario correctamente
             login(request, usuario)  # Inicia sesión automáticamente
             return redirect('home')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
 
     return render(request, 'auth_core/registro.html', {'form': form})
+
+@login_required
+def actualizar_direccion(request):
+    profile = request.user.profile
+    if request.method == 'POST':
+        form = AddressForm(request.POST)
+        if form.is_valid():
+            profile.direccion = form.cleaned_data['direccion']
+            profile.save()
+            # tras guardar, volvemos al flujo de compra o donde venga 'next'
+            next_url = request.GET.get('next') or 'ver_carrito'
+            return redirect(next_url)
+    else:
+        form = AddressForm(initial={'direccion': profile.direccion})
+
+    return render(request, 'core/actualizar_direccion.html', {'form': form})
+
 
 @staff_member_required
 def admin_pedidos(request):

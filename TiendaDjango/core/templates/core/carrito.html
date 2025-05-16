@@ -36,6 +36,48 @@
     {% else %}
         <p class="text-center text-muted">Tu carrito está vacío.</p>
     {% endif %}
+    <form method="post" action="{% url 'finalizar_compra' %}">
+  {% csrf_token %}
+  <!-- tabla de items existentes… -->
+
+  <div class="form-group">
+    <label>Método de envío:</label><br>
+    <label>
+      <input type="radio" name="metodo_envio" value="Tienda" checked>
+      Recoger en tienda
+    </label>
+    <label>
+      <input type="radio" name="metodo_envio" value="Domicilio">
+      Envío a domicilio
+    </label>
+  </div>
+
+  <div id="direccion-section" style="display:none;">
+    {% if user.profile.direccion %}
+      <p><strong>Dirección:</strong> {{ user.profile.direccion }}</p>
+    {% endif %}
+    <a class="btn btn-secondary"
+       href="{% url 'actualizar_direccion' %}?next=finalizar_compra">
+      {% if user.profile.direccion %}Actualizar dirección{% else %}Agregar dirección{% endif %}
+    </a>
+  </div>
+
+  <p>&nbsp;</p>
+  <button type="submit" class="btn btn-primary">Finalizar compra</button>
+  <p>&nbsp;</p>
+
+</form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const radios = document.getElementsByName('metodo_envio');
+    const sec   = document.getElementById('direccion-section');
+    radios.forEach(r => r.addEventListener('change', () => {
+      sec.style.display = (r.value === 'Domicilio') ? 'block' : 'none';
+    }));
+  });
+</script>
+
 
     <a href="{% url 'home' %}" class="btn btn-primary">🔙 Seguir Comprando</a>
 </div>

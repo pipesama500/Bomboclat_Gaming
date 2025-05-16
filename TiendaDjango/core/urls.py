@@ -12,6 +12,7 @@ urlpatterns = [
     path('finalizar/', views.finalizar_compra, name='finalizar_compra'),
     path('pedido-exitoso/<int:pedido_id>/', views.pedido_exitoso, name='pedido_exitoso'),
     path('pedido-exitoso/<int:pedido_id>/factura/', views.generar_factura_pdf, name='generar_factura_pdf'),
+    path('actualizar-direccion/', views.actualizar_direccion, name='actualizar_direccion'),
     path('mis-pedidos/', views.mis_pedidos, name='mis_pedidos'),
 
     #Urls autenticacion

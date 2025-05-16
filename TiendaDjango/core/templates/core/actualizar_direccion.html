@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <h2>Actualizar dirección de envío</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      {{ form.direccion.label_tag }}
+      {{ form.direccion }}
+      {% if form.direccion.errors %}
+        <div class="text-danger">{{ form.direccion.errors }}</div>
+      {% endif %}
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+  </form>
+</div>
+{% endblock %}

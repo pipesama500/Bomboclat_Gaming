@@ -5,8 +5,41 @@
 <h2>📝 Registro de Usuario</h2>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    <div class="form-group">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+        {% if form.username.errors %}
+          <div class="text-danger">{{ form.username.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        {{ form.password1.label_tag }}
+        {{ form.password1 }}
+        {% if form.password1.errors %}
+          <div class="text-danger">{{ form.password1.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        {{ form.password2.label_tag }}
+        {{ form.password2 }}
+        {% if form.password2.errors %}
+          <div class="text-danger">{{ form.password2.errors }}</div>
+        {% endif %}
+    </div>
+
+    {# — aquí va el campo de dirección opcional —#}
+    <div class="form-group">
+        {{ form.direccion.label_tag }}
+        {{ form.direccion }}
+        {% if form.direccion.errors %}
+          <div class="text-danger">{{ form.direccion.errors }}</div>
+        {% endif %}
+    </div>
+
     <button type="submit" class="btn btn-success mt-2">Registrarse</button>
 </form>
+
 <p>¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a></p>
 {% endblock %}
