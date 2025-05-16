@@ -51,7 +51,7 @@
                 <p class="card-text">Precio: ${{ producto.precio|miles }}</p>
                 <p class="card-text">Stock: {{ producto.stock }}</p>
                 <div class="mt-auto">
-                    <a href="{% url 'producto_detalle' producto.id %}" class="btn btn-info btn-sm">Ver Detalle</a>
+                    <a href="{% url 'producto_detalle' producto.id %}" class="btn btn-info btn-sm"  style="background-color: gray; border-color: gray; color: white;">Ver Detalle</a>
                     <a href="{% url 'agregar_al_carrito' producto.id %}" class="btn btn-success btn-sm">Agregar al Carrito</a>
                 </div>
             </div>
