@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load price_format %}
 {% block title %}🛒 Mi Carrito - Tienda Gamer{% endblock %}
 
 {% block content %}
@@ -21,8 +21,8 @@
                 <tr>
                     <td>{{ item.producto.nombre }}</td>
                     <td>{{ item.cantidad }}</td>
-                    <td>${{ item.producto.precio }}</td>
-                    <td>${{ item.subtotal }}</td>
+                    <td>${{ item.producto.precio|miles }}</td>
+                    <td>${{ item.subtotal|miles }}</td>
                     <td>
                         <a href="{% url 'eliminar_del_carrito' item.producto.id %}" class="btn btn-danger btn-sm">🗑 Eliminar</a>
                     </td>
@@ -31,40 +31,34 @@
             </tbody>
         </table>
         <a href="{% url 'vaciar_carrito' %}" class="btn btn-danger mt-3">🗑 Vaciar Carrito</a>
-        <a href="{% url 'finalizar_compra' %}" class="btn btn-success mt-3">💳 Finalizar Compra</a>
-        <h4 class="text-end">Total: ${{ total }}</h4>
-    {% else %}
-        <p class="text-center text-muted">Tu carrito está vacío.</p>
-    {% endif %}
-    <form method="post" action="{% url 'finalizar_compra' %}">
-  {% csrf_token %}
-  <!-- tabla de items existentes… -->
 
-  <div class="form-group">
-    <label>Método de envío:</label><br>
-    <label>
-      <input type="radio" name="metodo_envio" value="Tienda" checked>
-      Recoger en tienda
-    </label>
-    <label>
-      <input type="radio" name="metodo_envio" value="Domicilio">
-      Envío a domicilio
-    </label>
-  </div>
+        <form method="post" action="{% url 'finalizar_compra' %}">
+    {% csrf_token %}
+    <!-- tabla de items existentes… -->
 
-  <div id="direccion-section" style="display:none;">
-    {% if user.profile.direccion %}
-      <p><strong>Dirección:</strong> {{ user.profile.direccion }}</p>
-    {% endif %}
-    <a class="btn btn-secondary"
-       href="{% url 'actualizar_direccion' %}?next=finalizar_compra">
-      {% if user.profile.direccion %}Actualizar dirección{% else %}Agregar dirección{% endif %}
-    </a>
-  </div>
+    <div class="form-group">
+      <label>Método de envío:</label><br>
+      <label>
+        <input type="radio" name="metodo_envio" value="Tienda" checked>
+        Recoger en tienda
+      </label>
+      <label>
+        <input type="radio" name="metodo_envio" value="Domicilio">
+        Envío a domicilio
+      </label>
+    </div>
 
-  <p>&nbsp;</p>
-  <button type="submit" class="btn btn-primary">Finalizar compra</button>
-  <p>&nbsp;</p>
+    <div id="direccion-section" style="display:none;">
+      {% if user.profile.direccion %}
+        <p><strong>Dirección:</strong> {{ user.profile.direccion }}</p>
+      {% endif %}
+      <a class="btn btn-secondary"
+        href="{% url 'actualizar_direccion' %}?next=finalizar_compra">
+        {% if user.profile.direccion %}Actualizar dirección{% else %}Agregar dirección{% endif %}
+      </a>
+    </div>
+
+  <button type="submit" class="btn btn-success mt-3">💳 Finalizar Compra</button>
 
 </form>
 
@@ -77,8 +71,11 @@
     }));
   });
 </script>
+        <h4 class="text-end">Total: ${{ total|miles}}</h4>
+    {% else %}
+        <p class="text-center text-muted">Tu carrito está vacío.</p>
+    {% endif %}
 
-
-    <a href="{% url 'home' %}" class="btn btn-primary">🔙 Seguir Comprando</a>
+  <a href="{% url 'home' %}" class="btn btn-primary">🔙 Seguir Comprando</a>
 </div>
 {% endblock %}
