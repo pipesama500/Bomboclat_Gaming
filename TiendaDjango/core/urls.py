@@ -12,7 +12,8 @@ urlpatterns = [
     path('finalizar/', views.finalizar_compra, name='finalizar_compra'),
     path('pedido-exitoso/<int:pedido_id>/', views.pedido_exitoso, name='pedido_exitoso'),
     path('pedido-exitoso/<int:pedido_id>/factura/', views.generar_factura_pdf, name='generar_factura_pdf'),
-    
+    path('mis-pedidos/', views.mis_pedidos, name='mis_pedidos'),
+
     #Urls autenticacion
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
@@ -26,3 +27,4 @@ urlpatterns = [
     path('admin-core/editar-producto/<int:producto_id>/', views.editar_producto, name='editar_producto'),
     path('admin-core/eliminar-producto/<int:producto_id>/', views.eliminar_producto, name='eliminar_producto'),
 ]
+

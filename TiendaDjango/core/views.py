@@ -141,6 +141,17 @@ def generar_factura_pdf(request, pedido_id):
 
     return response
 
+@login_required
+def mis_pedidos(request):
+    """
+    Muestra al usuario autenticado la lista de sus propios pedidos,
+    con estado y enlace para descargar la factura en PDF.
+    """
+    pedidos = Pedido.objects.filter(usuario=request.user).order_by('-fecha')
+    return render(request, 'core/mis_pedidos.html', {
+        'pedidos': pedidos
+    })
+
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
