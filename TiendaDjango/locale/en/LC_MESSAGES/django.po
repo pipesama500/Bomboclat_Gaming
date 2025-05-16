@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-16 00:46-0500\n"
+"POT-Creation-Date: 2025-05-16 01:28-0500\n"
 "PO-Revision-Date: 2025-05-16 00:58-0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -107,7 +107,7 @@ msgstr "Products"
 msgid "Carrito de"
 msgstr "Cart of"
 
-#: .\core\models.py:64
+#: .\core\models.py:64 .\core\templates\base.html:29
 msgid "Carrito"
 msgstr "Cart"
 
@@ -203,6 +203,7 @@ msgstr "Save Changes"
 
 #: .\core\templates\admin_core\admin_pedidos.html:5
 #: .\core\templates\admin_core\admin_pedidos.html:8
+#: .\core\templates\base.html:31
 msgid "Gestión de Pedidos"
 msgstr "Order Management"
 
@@ -299,6 +300,7 @@ msgstr "Back to Home"
 
 #: .\core\templates\admin_core\admin_productos.html:5
 #: .\core\templates\admin_core\admin_productos.html:8
+#: .\core\templates\base.html:32
 msgid "Gestión de Productos"
 msgstr "Product Management"
 
@@ -352,7 +354,7 @@ msgstr "Current image:"
 
 #: .\core\templates\auth_core\login.html:4
 #: .\core\templates\auth_core\login.html:8
-#: .\core\templates\auth_core\login.html:12
+#: .\core\templates\auth_core\login.html:12 .\core\templates\base.html:38
 msgid "Iniciar Sesión"
 msgstr "Log In"
 
@@ -368,7 +370,7 @@ msgstr "Register here"
 msgid "Registro"
 msgstr "Registration"
 
-#: .\core\templates\auth_core\registro.html:4
+#: .\core\templates\auth_core\registro.html:4 .\core\templates\base.html:7
 #: .\core\templates\core\carrito.html:5
 msgid "Tienda Gamer"
 msgstr "Gamer Store"
@@ -377,7 +379,7 @@ msgstr "Gamer Store"
 msgid "Registro de Usuario"
 msgstr "User Registration"
 
-#: .\core\templates\auth_core\registro.html:46
+#: .\core\templates\auth_core\registro.html:46 .\core\templates\base.html:39
 msgid "Registrarse"
 msgstr "Register"
 
@@ -388,6 +390,32 @@ msgstr "Already have an account?"
 #: .\core\templates\auth_core\registro.html:49
 msgid "Inicia sesión aquí"
 msgstr "Log in here"
+
+#: .\core\templates\base.html:21
+msgid "Bomboclat Gaming"
+msgstr "Bomboclat Gaming"
+
+#: .\core\templates\base.html:28
+msgid "Inicio"
+msgstr "Home"
+
+
+
+
+#: .\core\templates\base.html:35 .\core\templates\core\mis_pedidos.html:5
+#: .\core\templates\core\mis_pedidos.html:9
+msgid "Mis Pedidos"
+msgstr "My Orders"
+
+#: .\core\templates\base.html:36
+#, fuzzy
+#| msgid "Iniciar Sesión"
+msgid "Cerrar Sesión"
+msgstr "Log In"
+
+#: .\core\templates\base.html:53
+msgid "Universidad Eafit – Felipe Martínez y Juan Pablo Mejía"
+msgstr "Eafit – Felipe Martínez and Juan Pablo Mejía"
 
 #: .\core\templates\core\actualizar_direccion.html:4
 #: .\core\templates\core\actualizar_direccion.html:8
@@ -473,11 +501,6 @@ msgstr "Add to Cart"
 msgid "No hay productos disponibles con los criterios seleccionados."
 msgstr "No products available with the selected criteria."
 
-#: .\core\templates\core\mis_pedidos.html:5
-#: .\core\templates\core\mis_pedidos.html:9
-msgid "Mis Pedidos"
-msgstr "My Orders"
-
 #: .\core\templates\core\mis_pedidos.html:30
 msgid "📄 Factura"
 msgstr "📄 Invoice"
@@ -507,8 +530,8 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"    Thank you for your purchase. Your order <strong>#%(pid)s</strong> has been "
-"registered.\n"
+"    Thank you for your purchase. Your order <strong>#%(pid)s</strong> has "
+"been registered.\n"
 "    "
 
 #: .\core\templates\core\pedido_exitoso.html:13
