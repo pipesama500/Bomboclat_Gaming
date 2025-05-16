@@ -57,7 +57,10 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
                 <div class="modal-body">
-                  {{ pedido.direccion_envio }}
+                    <p><strong>Dirección:</strong> {{ pedido.direccion_envio }}</p>
+                    <p><strong>País:</strong> {{ pedido.usuario.profile.pais }}</p>
+                    <p><strong>Municipio:</strong> {{ pedido.usuario.profile.municipio }}</p>
+                    <p><strong>Ciudad:</strong> {{ pedido.usuario.profile.ciudad }}</p>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
