@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load price_format %}
 {% block title %}📝 Mis Pedidos{% endblock %}
 
 {% block content %}
@@ -20,7 +20,7 @@
             <tr>
                 <td>{{ pedido.id }}</td>
                 <td>{{ pedido.fecha|date:"Y-m-d H:i" }}</td>
-                <td>${{ pedido.total }}</td>
+                <td>${{ pedido.total|miles}}</td>
                 <td>{{ pedido.estado }}</td>
                 <td>
                     <a href="{% url 'generar_factura_pdf' pedido.id %}"
