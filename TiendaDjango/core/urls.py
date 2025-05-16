@@ -3,6 +3,8 @@ from . import views
 from core.views import productos_json
 
 urlpatterns = [
+
+    
     #Urls cliente
     path('', views.home, name='home'),
     path('producto/<int:producto_id>/', views.producto_detalle, name='producto_detalle'),

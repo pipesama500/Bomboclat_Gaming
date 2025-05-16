@@ -1,9 +1,10 @@
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}Tienda Gamer{% endblock %}</title>
+  <title>{% block title %}{% trans "Tienda Gamer" %}{% endblock %}</title>
   <link 
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     rel="stylesheet"
@@ -17,40 +18,30 @@
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
         <img src="{% static 'images/logo.png' %}" alt="Logo" style="height:40px; margin-right:8px;">
-        Bomboclat Gaming
+        {% trans "Bomboclat Gaming" %}
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">🏠 Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'ver_carrito' %}">🛒 Carrito</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">🏠 {% trans "Inicio" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'ver_carrito' %}">🛒 {% trans "Carrito" %}</a></li>
           {% if user.is_staff %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'admin_pedidos' %}">📦 Gestión de Pedidos</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'admin_productos' %}">🎮 Gestión de Productos</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'admin_pedidos' %}">📦 {% trans "Gestión de Pedidos" %}</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'admin_productos' %}">🎮 {% trans "Gestión de Productos" %}</a></li>
           {% endif %}
           {% if user.is_authenticated %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'mis_pedidos' %}">📝 Mis Pedidos</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">🔓 Cerrar Sesión</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'mis_pedidos' %}">📝 {% trans "Mis Pedidos" %}</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">🔓 {% trans "Cerrar Sesión" %}</a></li>
           {% else %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">🔑 Iniciar Sesión</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'registro' %}">📝 Registrarse</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">🔑 {% trans "Iniciar Sesión" %}</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'registro' %}">📝 {% trans "Registrarse" %}</a></li>
           {% endif %}
         </ul>
       </div>
     </div>
   </nav>
-
-  <!-- FRASE DEL DÍA -->
-  {% if daily_quote.text %}
-  <div class="alert alert-light text-center mb-0">
-    <p class="mb-0">“{{ daily_quote.text }}”</p>
-    {% if daily_quote.author %}
-      <small class="text-muted d-block mt-2">— {{ daily_quote.author }}</small>
-    {% endif %}
-  </div>
-{% endif %}
 
   <!-- CONTENIDO -->
   <main class="container mt-4">
@@ -59,7 +50,16 @@
 
   <!-- FOOTER -->
   <footer class="text-center mt-4 py-3 bg-light">
-    <p>© 2025 Universidad Eafit – Felipe Martínez y Juan Pablo Mejía</p>
+    <p>© 2025 {% trans "Universidad Eafit – Felipe Martínez y Juan Pablo Mejía" %}</p>
+      <!-- FRASE DEL DÍA -->
+  {% if daily_quote.text %}
+  <div class="alert alert-light text-center mb-0">
+    <p class="mb-0">“{{ daily_quote.text }}”</p>
+    {% if daily_quote.author %}
+      <small class="text-muted d-block mt-2">— {{ daily_quote.author }}</small>
+    {% endif %}
+  </div>
+  {% endif %}
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

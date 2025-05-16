@@ -1,16 +1,18 @@
 {% extends "base.html" %}
-{% block title %}Actualizar Estado - Pedido #{{ pedido.id }}{% endblock %}
+{% load i18n %}
+
+{% block title %}{% blocktrans with pid=pedido.id %}Actualizar Estado - Pedido #{{ pid }}{% endblocktrans %}{% endblock %}
 
 {% block content %}
-<h2>Actualizar Estado del Pedido #{{ pedido.id }}</h2>
+<h2>{% blocktrans with pid=pedido.id %}Actualizar Estado del Pedido #{{ pid }}{% endblocktrans %}</h2>
 <form method="post">
     {% csrf_token %}
     <select name="estado" class="form-select">
-        <option value="Pendiente" {% if pedido.estado == 'Pendiente' %}selected{% endif %}>Pendiente</option>
-        <option value="Enviado" {% if pedido.estado == 'Enviado' %}selected{% endif %}>Enviado</option>
-        <option value="Cancelado" {% if pedido.estado == 'Cancelado' %}selected{% endif %}>Cancelado</option>
-        <option value="Finalizado" {% if pedido.estado == 'Finalizado' %}selected{% endif %}>Finalizado</option>
+        <option value="Pendiente" {% if pedido.estado == 'Pendiente' %}selected{% endif %}>{% trans "Pendiente" %}</option>
+        <option value="Enviado" {% if pedido.estado == 'Enviado' %}selected{% endif %}>{% trans "Enviado" %}</option>
+        <option value="Cancelado" {% if pedido.estado == 'Cancelado' %}selected{% endif %}>{% trans "Cancelado" %}</option>
+        <option value="Finalizado" {% if pedido.estado == 'Finalizado' %}selected{% endif %}>{% trans "Finalizado" %}</option>
     </select>
-    <button type="submit" class="btn btn-success mt-2">Guardar Cambios</button>
+    <button type="submit" class="btn btn-success mt-2">{% trans "Guardar Cambios" %}</button>
 </form>
 {% endblock %}

@@ -1,90 +1,96 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load price_format %}
-{% block title %}📦 Gestión de Pedidos - Admin{% endblock %}
+
+{% block title %}📦 {% trans "Gestión de Pedidos" %} - Admin{% endblock %}
 
 {% block content %}
-<h2>📦 Gestión de Pedidos</h2>
+<h2>📦 {% trans "Gestión de Pedidos" %}</h2>
 
 <!-- Resumen de estados -->
 <div class="mb-3">
-    <p><strong>Pedidos Pendientes:</strong> {{ pendientes }}</p>
-    <p><strong>Pedidos Enviados:</strong> {{ enviados }}</p>
-    <p><strong>Pedidos Finalizados:</strong> {{ finalizados }}</p>
+    <p><strong>{% trans "Pedidos Pendientes:" %}</strong> {{ pendientes }}</p>
+    <p><strong>{% trans "Pedidos Enviados:" %}</strong> {{ enviados }}</p>
+    <p><strong>{% trans "Pedidos Finalizados:" %}</strong> {{ finalizados }}</p>
 </div>
 
 <!-- Filtros de Estado -->
 <form method="get" class="mb-3 d-flex gap-2">
     <select name="estado" class="form-select">
-        <option value="">Todos los Estados</option>
-        <option value="Pendiente" {% if estado_filtro == 'Pendiente' %}selected{% endif %}>Pendiente</option>
-        <option value="Enviado" {% if estado_filtro == 'Enviado' %}selected{% endif %}>Enviado</option>
-        <option value="Finalizado" {% if estado_filtro == 'Finalizado' %}selected{% endif %}>Finalizado</option>
+        <option value="">{% trans "Todos los Estados" %}</option>
+        <option value="Pendiente" {% if estado_filtro == 'Pendiente' %}selected{% endif %}>{% trans "Pendiente" %}</option>
+        <option value="Enviado" {% if estado_filtro == 'Enviado' %}selected{% endif %}>{% trans "Enviado" %}</option>
+        <option value="Finalizado" {% if estado_filtro == 'Finalizado' %}selected{% endif %}>{% trans "Finalizado" %}</option>
     </select>
-    <button type="submit" class="btn btn-primary">Filtrar</button>
-    <a href="{% url 'admin_pedidos' %}" class="btn btn-secondary">Limpiar</a>
+    <button type="submit" class="btn btn-primary">{% trans "Filtrar" %}</button>
+    <a href="{% url 'admin_pedidos' %}" class="btn btn-secondary">{% trans "Limpiar" %}</a>
 </form>
 
 <!-- Tabla de Pedidos -->
 <table class="table table-striped">
-    <tr>
-        <th>ID</th>
-        <th>Cliente</th>
-        <th>Total</th>
-        <th>Estado</th>
-        <th>Dirección</th>
-        <th>Acciones</th>
-    </tr>
-    {% for pedido in pedidos %}
-    <tr>
-        <td>{{ pedido.id }}</td>
-        <td>{{ pedido.usuario.username }}</td>
-        <td>${{ pedido.total|miles }}</td>
-        <td>{{ pedido.estado }}</td>
-        <td>
-        {% if pedido.metodo_envio == 'Domicilio' %}
-          <button type="button"
-                  class="btn btn-sm btn-info"
-                  data-bs-toggle="modal"
-                  data-bs-target="#direccionModal{{ pedido.id }}">
-            Ver dirección
-          </button>
+    <thead>
+        <tr>
+            <th>{% trans "ID" %}</th>
+            <th>{% trans "Cliente" %}</th>
+            <th>{% trans "Total" %}</th>
+            <th>{% trans "Estado" %}</th>
+            <th>{% trans "Dirección" %}</th>
+            <th>{% trans "Acciones" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pedido in pedidos %}
+        <tr>
+            <td>{{ pedido.id }}</td>
+            <td>{{ pedido.usuario.username }}</td>
+            <td>${{ pedido.total|miles }}</td>
+            <td>{{ pedido.estado }}</td>
+            <td>
+            {% if pedido.metodo_envio == 'Domicilio' %}
+              <button type="button"
+                      class="btn btn-sm btn-info"
+                      data-bs-toggle="modal"
+                      data-bs-target="#direccionModal{{ pedido.id }}">
+                {% trans "Ver dirección" %}
+              </button>
 
-          <!-- Modal Bootstrap 5 -->
-          <div class="modal fade" id="direccionModal{{ pedido.id }}" tabindex="-1" aria-labelledby="direccionModalLabel{{ pedido.id }}" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="direccionModalLabel{{ pedido.id }}">Dirección de envío</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Dirección:</strong> {{ pedido.direccion_envio }}</p>
-                    <p><strong>País:</strong> {{ pedido.usuario.profile.pais }}</p>
-                    <p><strong>Municipio:</strong> {{ pedido.usuario.profile.municipio }}</p>
-                    <p><strong>Ciudad:</strong> {{ pedido.usuario.profile.ciudad }}</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <!-- Modal Bootstrap 5 -->
+              <div class="modal fade" id="direccionModal{{ pedido.id }}" tabindex="-1" aria-labelledby="direccionModalLabel{{ pedido.id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="direccionModalLabel{{ pedido.id }}">{% trans "Dirección de envío" %}</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{% trans "Cerrar" %}"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>{% trans "Dirección:" %}</strong> {{ pedido.direccion_envio }}</p>
+                        <p><strong>{% trans "País:" %}</strong> {{ pedido.usuario.profile.pais }}</p>
+                        <p><strong>{% trans "Municipio:" %}</strong> {{ pedido.usuario.profile.municipio }}</p>
+                        <p><strong>{% trans "Ciudad:" %}</strong> {{ pedido.usuario.profile.ciudad }}</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Cerrar" %}</button>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        {% else %}
-          Tienda
-        {% endif %}
-        </td>
-        <td>
-            {% if pedido.estado != 'Finalizado' %}
-            <a href="{% url 'actualizar_estado' pedido.id %}" class="btn btn-warning">Actualizar Estado</a>
             {% else %}
-            <span class="badge bg-secondary">Finalizado</span>
+              {% trans "Tienda" %}
             {% endif %}
-        </td>
-    </tr>
-    {% empty %}
-    <tr><td colspan="5">No hay pedidos para mostrar.</td></tr>
-    {% endfor %}
+            </td>
+            <td>
+                {% if pedido.estado != 'Finalizado' %}
+                <a href="{% url 'actualizar_estado' pedido.id %}" class="btn btn-warning">{% trans "Actualizar Estado" %}</a>
+                {% else %}
+                <span class="badge bg-secondary">{% trans "Finalizado" %}</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6">{% trans "No hay pedidos para mostrar." %}</td></tr>
+        {% endfor %}
+    </tbody>
 </table>
 
-<a href="{% url 'home' %}" class="btn btn-secondary">Volver a Inicio</a>
+<a href="{% url 'home' %}" class="btn btn-secondary">{% trans "Volver a Inicio" %}</a>
 {% endblock %}

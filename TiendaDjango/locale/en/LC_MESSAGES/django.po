@@ -1,0 +1,580 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-16 01:28-0500\n"
+"PO-Revision-Date: 2025-05-16 00:58-0500\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\core\forms.py:16
+msgid "Dirección (opcional)"
+msgstr "Address (optional)"
+
+#: .\core\forms.py:20
+msgid "País (opcional)"
+msgstr "Country (optional)"
+
+#: .\core\forms.py:24
+msgid "Municipio (opcional)"
+msgstr "Municipality (optional)"
+
+#: .\core\forms.py:28
+msgid "Ciudad (opcional)"
+msgstr "City (optional)"
+
+#: .\core\forms.py:56 .\core\models.py:103 .\core\models.py:125
+#: .\core\templates\admin_core\admin_pedidos.html:62
+msgid "Dirección de envío"
+msgstr "Shipping address"
+
+#: .\core\forms.py:57 .\core\models.py:129
+msgid "País"
+msgstr "Country"
+
+#: .\core\forms.py:58 .\core\models.py:133
+msgid "Municipio"
+msgstr "Municipality"
+
+#: .\core\forms.py:59 .\core\models.py:137
+msgid "Ciudad"
+msgstr "City"
+
+#: .\core\forms.py:63
+msgid "Calle, número, etc."
+msgstr "Street, number, etc."
+
+#: .\core\forms.py:66
+msgid "Ej. Colombia"
+msgstr "E.g. Colombia"
+
+#: .\core\forms.py:69
+msgid "Ej. Medellín"
+msgstr "E.g. Medellín"
+
+#: .\core\forms.py:72
+msgid "Ej. Envigado"
+msgstr "E.g. Envigado"
+
+#: .\core\models.py:9
+msgid "Nombre de categoría"
+msgstr "Category name"
+
+#: .\core\models.py:18 .\core\templates\admin_core\admin_productos.html:14
+msgid "Nombre"
+msgstr "Name"
+
+#: .\core\models.py:22
+msgid "Descripción"
+msgstr "Description"
+
+#: .\core\models.py:25 .\core\templates\admin_core\admin_productos.html:15
+msgid "Precio"
+msgstr "Price"
+
+#: .\core\models.py:29 .\core\templates\admin_core\admin_productos.html:16
+msgid "Stock"
+msgstr "Stock"
+
+#: .\core\models.py:34
+msgid "Categoría"
+msgstr "Category"
+
+#: .\core\models.py:37
+msgid "Imagen"
+msgstr "Image"
+
+#: .\core\models.py:47 .\core\models.py:83 .\core\models.py:122
+msgid "Usuario"
+msgstr "User"
+
+#: .\core\models.py:52
+msgid "Productos"
+msgstr "Products"
+
+#: .\core\models.py:59
+msgid "Carrito de"
+msgstr "Cart of"
+
+#: .\core\models.py:64 .\core\templates\base.html:29
+msgid "Carrito"
+msgstr "Cart"
+
+#: .\core\models.py:68 .\core\models.py:155
+#: .\core\templates\core\carrito.html:15
+msgid "Producto"
+msgstr "Product"
+
+#: .\core\models.py:71 .\core\models.py:158
+#: .\core\templates\core\carrito.html:16
+msgid "Cantidad"
+msgstr "Quantity"
+
+#: .\core\models.py:78
+msgid "en el carrito de"
+msgstr "in the cart of"
+
+#: .\core\models.py:87 .\core\templates\core\mis_pedidos.html:14
+msgid "Fecha"
+msgstr "Date"
+
+#: .\core\models.py:90 .\core\templates\admin_core\admin_pedidos.html:35
+#: .\core\templates\core\mis_pedidos.html:15
+msgid "Total"
+msgstr "Total"
+
+#: .\core\models.py:95 .\core\templates\core\carrito.html:48
+msgid "Recoger en tienda"
+msgstr "In-store pickup"
+
+#: .\core\models.py:96 .\core\templates\core\carrito.html:52
+msgid "Envío a domicilio"
+msgstr "Home delivery"
+
+#: .\core\models.py:99
+msgid "Método de envío"
+msgstr "Shipping method"
+
+#: .\core\models.py:107 .\core\templates\admin_core\actualizar_estado.html:11
+#: .\core\templates\admin_core\admin_pedidos.html:21
+msgid "Pendiente"
+msgstr "Pending"
+
+#: .\core\models.py:108 .\core\templates\admin_core\actualizar_estado.html:12
+#: .\core\templates\admin_core\admin_pedidos.html:22
+msgid "Enviado"
+msgstr "Shipped"
+
+#: .\core\models.py:109 .\core\templates\admin_core\actualizar_estado.html:13
+msgid "Cancelado"
+msgstr "Canceled"
+
+#: .\core\models.py:112 .\core\templates\admin_core\admin_pedidos.html:36
+#: .\core\templates\core\mis_pedidos.html:16
+msgid "Estado"
+msgstr "Status"
+
+#: .\core\models.py:117 .\core\models.py:151
+msgid "Pedido"
+msgstr "Order"
+
+#: .\core\models.py:142
+msgid "Perfil de"
+msgstr "Profile of"
+
+#: .\core\models.py:161 .\core\templates\core\carrito.html:18
+msgid "Subtotal"
+msgstr "Subtotal"
+
+#: .\core\models.py:166
+msgid "en Pedido"
+msgstr "in Order"
+
+#: .\core\templates\admin_core\actualizar_estado.html:4
+#, python-format
+msgid "Actualizar Estado - Pedido #%(pid)s"
+msgstr "Update Status - Order #%(pid)s"
+
+#: .\core\templates\admin_core\actualizar_estado.html:7
+#, python-format
+msgid "Actualizar Estado del Pedido #%(pid)s"
+msgstr "Update Order Status #%(pid)s"
+
+#: .\core\templates\admin_core\actualizar_estado.html:14
+#: .\core\templates\admin_core\admin_pedidos.html:23
+#: .\core\templates\admin_core\admin_pedidos.html:85
+msgid "Finalizado"
+msgstr "Completed"
+
+#: .\core\templates\admin_core\actualizar_estado.html:16
+msgid "Guardar Cambios"
+msgstr "Save Changes"
+
+#: .\core\templates\admin_core\admin_pedidos.html:5
+#: .\core\templates\admin_core\admin_pedidos.html:8
+#: .\core\templates\base.html:31
+msgid "Gestión de Pedidos"
+msgstr "Order Management"
+
+#: .\core\templates\admin_core\admin_pedidos.html:12
+msgid "Pedidos Pendientes:"
+msgstr "Pending Orders:"
+
+#: .\core\templates\admin_core\admin_pedidos.html:13
+msgid "Pedidos Enviados:"
+msgstr "Shipped Orders:"
+
+#: .\core\templates\admin_core\admin_pedidos.html:14
+msgid "Pedidos Finalizados:"
+msgstr "Completed Orders:"
+
+#: .\core\templates\admin_core\admin_pedidos.html:20
+msgid "Todos los Estados"
+msgstr "All Statuses"
+
+#: .\core\templates\admin_core\admin_pedidos.html:25
+#: .\core\templates\core\home.html:26
+msgid "Filtrar"
+msgstr "Filter"
+
+#: .\core\templates\admin_core\admin_pedidos.html:26
+#: .\core\templates\core\home.html:27
+msgid "Limpiar"
+msgstr "Clear"
+
+#: .\core\templates\admin_core\admin_pedidos.html:33
+#: .\core\templates\admin_core\admin_productos.html:13
+#: .\core\templates\core\mis_pedidos.html:13
+msgid "ID"
+msgstr "ID"
+
+#: .\core\templates\admin_core\admin_pedidos.html:34
+msgid "Cliente"
+msgstr "Customer"
+
+#: .\core\templates\admin_core\admin_pedidos.html:37
+msgid "Dirección"
+msgstr "Address"
+
+#: .\core\templates\admin_core\admin_pedidos.html:38
+#: .\core\templates\admin_core\admin_productos.html:17
+#: .\core\templates\core\carrito.html:19
+#: .\core\templates\core\mis_pedidos.html:17
+msgid "Acciones"
+msgstr "Actions"
+
+#: .\core\templates\admin_core\admin_pedidos.html:54
+msgid "Ver dirección"
+msgstr "View address"
+
+#: .\core\templates\admin_core\admin_pedidos.html:63
+#: .\core\templates\admin_core\admin_pedidos.html:72
+msgid "Cerrar"
+msgstr "Close"
+
+#: .\core\templates\admin_core\admin_pedidos.html:66
+#: .\core\templates\core\carrito.html:58
+msgid "Dirección:"
+msgstr "Address:"
+
+#: .\core\templates\admin_core\admin_pedidos.html:67
+msgid "País:"
+msgstr "Country:"
+
+#: .\core\templates\admin_core\admin_pedidos.html:68
+msgid "Municipio:"
+msgstr "Municipality:"
+
+#: .\core\templates\admin_core\admin_pedidos.html:69
+msgid "Ciudad:"
+msgstr "City:"
+
+#: .\core\templates\admin_core\admin_pedidos.html:78
+msgid "Tienda"
+msgstr "Store"
+
+#: .\core\templates\admin_core\admin_pedidos.html:83
+msgid "Actualizar Estado"
+msgstr "Update Status"
+
+#: .\core\templates\admin_core\admin_pedidos.html:90
+msgid "No hay pedidos para mostrar."
+msgstr "No orders to display."
+
+#: .\core\templates\admin_core\admin_pedidos.html:95
+#: .\core\templates\admin_core\admin_productos.html:35
+#: .\core\templates\core\pedido_exitoso.html:17
+msgid "Volver a Inicio"
+msgstr "Back to Home"
+
+#: .\core\templates\admin_core\admin_productos.html:5
+#: .\core\templates\admin_core\admin_productos.html:8
+#: .\core\templates\base.html:32
+msgid "Gestión de Productos"
+msgstr "Product Management"
+
+#: .\core\templates\admin_core\admin_productos.html:9
+#: .\core\templates\admin_core\crear_producto.html:8
+#: .\core\templates\admin_core\crear_producto.html:17
+#: .\core\templates\admin_core\editar_producto.html:8
+#: .\core\templates\admin_core\editar_producto.html:17
+msgid "Crear Producto"
+msgstr "Create Product"
+
+#: .\core\templates\admin_core\admin_productos.html:28
+msgid "Editar"
+msgstr "Edit"
+
+#: .\core\templates\admin_core\admin_productos.html:29
+#: .\core\templates\core\carrito.html:31
+msgid "Eliminar"
+msgstr "Delete"
+
+#: .\core\templates\admin_core\crear_producto.html:6
+#: .\core\templates\admin_core\editar_producto.html:6
+#, python-format
+msgid "Editar %(nombre)s"
+msgstr "Edit %(nombre)s"
+
+#: .\core\templates\admin_core\crear_producto.html:15
+#: .\core\templates\admin_core\editar_producto.html:15
+msgid "Editar Producto"
+msgstr "Edit Product"
+
+#: .\core\templates\admin_core\crear_producto.html:25
+#: .\core\templates\admin_core\editar_producto.html:36
+msgid "Actualizar"
+msgstr "Update"
+
+#: .\core\templates\admin_core\crear_producto.html:27
+#: .\core\templates\admin_core\editar_producto.html:38
+#: .\core\templates\core\actualizar_direccion.html:15
+msgid "Guardar"
+msgstr "Save"
+
+#: .\core\templates\admin_core\crear_producto.html:32
+#: .\core\templates\admin_core\editar_producto.html:44
+msgid "Volver a Gestión de Productos"
+msgstr "Back to Product Management"
+
+#: .\core\templates\admin_core\editar_producto.html:27
+msgid "Imagen actual:"
+msgstr "Current image:"
+
+#: .\core\templates\auth_core\login.html:4
+#: .\core\templates\auth_core\login.html:8
+#: .\core\templates\auth_core\login.html:12 .\core\templates\base.html:38
+msgid "Iniciar Sesión"
+msgstr "Log In"
+
+#: .\core\templates\auth_core\login.html:14
+msgid "¿No tienes cuenta?"
+msgstr "Don't have an account?"
+
+#: .\core\templates\auth_core\login.html:14
+msgid "Regístrate aquí"
+msgstr "Register here"
+
+#: .\core\templates\auth_core\registro.html:4
+msgid "Registro"
+msgstr "Registration"
+
+#: .\core\templates\auth_core\registro.html:4 .\core\templates\base.html:7
+#: .\core\templates\core\carrito.html:5
+msgid "Tienda Gamer"
+msgstr "Gamer Store"
+
+#: .\core\templates\auth_core\registro.html:7
+msgid "Registro de Usuario"
+msgstr "User Registration"
+
+#: .\core\templates\auth_core\registro.html:46 .\core\templates\base.html:39
+msgid "Registrarse"
+msgstr "Register"
+
+#: .\core\templates\auth_core\registro.html:49
+msgid "¿Ya tienes cuenta?"
+msgstr "Already have an account?"
+
+#: .\core\templates\auth_core\registro.html:49
+msgid "Inicia sesión aquí"
+msgstr "Log in here"
+
+#: .\core\templates\base.html:21
+msgid "Bomboclat Gaming"
+msgstr "Bomboclat Gaming"
+
+#: .\core\templates\base.html:28
+msgid "Inicio"
+msgstr "Home"
+
+
+
+
+#: .\core\templates\base.html:35 .\core\templates\core\mis_pedidos.html:5
+#: .\core\templates\core\mis_pedidos.html:9
+msgid "Mis Pedidos"
+msgstr "My Orders"
+
+#: .\core\templates\base.html:36
+#, fuzzy
+#| msgid "Iniciar Sesión"
+msgid "Cerrar Sesión"
+msgstr "Log In"
+
+#: .\core\templates\base.html:53
+msgid "Universidad Eafit – Felipe Martínez y Juan Pablo Mejía"
+msgstr "Eafit – Felipe Martínez and Juan Pablo Mejía"
+
+#: .\core\templates\core\actualizar_direccion.html:4
+#: .\core\templates\core\actualizar_direccion.html:8
+msgid "Actualizar datos de envío"
+msgstr "Update shipping information"
+
+#: .\core\templates\core\carrito.html:5 .\core\templates\core\carrito.html:9
+msgid "Mi Carrito"
+msgstr "My Cart"
+
+#: .\core\templates\core\carrito.html:17
+msgid "Precio Unitario"
+msgstr "Unit Price"
+
+#: .\core\templates\core\carrito.html:39
+msgid "Vaciar Carrito"
+msgstr "Empty Cart"
+
+#: .\core\templates\core\carrito.html:45
+msgid "Método de envío:"
+msgstr "Shipping method:"
+
+#: .\core\templates\core\carrito.html:63
+msgid "Actualizar dirección"
+msgstr "Update address"
+
+#: .\core\templates\core\carrito.html:65
+msgid "Agregar dirección"
+msgstr "Add address"
+
+#: .\core\templates\core\carrito.html:71
+msgid "Finalizar Compra"
+msgstr "Complete Purchase"
+
+#: .\core\templates\core\carrito.html:75
+msgid "Total:"
+msgstr "Total:"
+
+#: .\core\templates\core\carrito.html:77
+msgid "Tu carrito está vacío."
+msgstr "Your cart is empty."
+
+#: .\core\templates\core\carrito.html:81
+msgid "Seguir Comprando"
+msgstr "Continue Shopping"
+
+#: .\core\templates\core\home.html:6 .\core\templates\core\home.html:9
+msgid "Productos Disponibles"
+msgstr "Available Products"
+
+#: .\core\templates\core\home.html:15
+msgid "Todas las Categorías"
+msgstr "All Categories"
+
+#: .\core\templates\core\home.html:24
+msgid "Buscar por nombre"
+msgstr "Search by name"
+
+#: .\core\templates\core\home.html:45
+#: .\core\templates\core\producto_detalle.html:22
+msgid "Sin imagen"
+msgstr "No image"
+
+#: .\core\templates\core\home.html:52
+#: .\core\templates\core\producto_detalle.html:30
+msgid "Precio:"
+msgstr "Price:"
+
+#: .\core\templates\core\home.html:53
+msgid "Stock:"
+msgstr "Stock:"
+
+#: .\core\templates\core\home.html:56
+msgid "Ver Detalle"
+msgstr "View Details"
+
+#: .\core\templates\core\home.html:59
+#: .\core\templates\core\producto_detalle.html:33
+msgid "Agregar al Carrito"
+msgstr "Add to Cart"
+
+#: .\core\templates\core\home.html:66
+msgid "No hay productos disponibles con los criterios seleccionados."
+msgstr "No products available with the selected criteria."
+
+#: .\core\templates\core\mis_pedidos.html:30
+msgid "📄 Factura"
+msgstr "📄 Invoice"
+
+#: .\core\templates\core\mis_pedidos.html:36
+msgid "No tienes pedidos aún."
+msgstr "You don't have any orders yet."
+
+#: .\core\templates\core\mis_pedidos.html:43
+msgid "Volver al Inicio"
+msgstr "Back to Home"
+
+#: .\core\templates\core\pedido_exitoso.html:4
+msgid "✅ Compra Exitosa"
+msgstr "✅ Successful Purchase"
+
+#: .\core\templates\core\pedido_exitoso.html:8
+msgid "✅ ¡Compra Realizada con Éxito!"
+msgstr "✅ Purchase Completed Successfully!"
+
+#: .\core\templates\core\pedido_exitoso.html:9
+#, python-format
+msgid ""
+"\n"
+"    Gracias por tu compra. Tu pedido <strong>#%(pid)s</strong> ha sido "
+"registrado.\n"
+"    "
+msgstr ""
+"\n"
+"    Thank you for your purchase. Your order <strong>#%(pid)s</strong> has "
+"been registered.\n"
+"    "
+
+#: .\core\templates\core\pedido_exitoso.html:13
+msgid "Descargar Factura en PDF"
+msgstr "Download PDF Invoice"
+
+#: .\core\templates\core\producto_detalle.html:8
+#, python-format
+msgid "%(nombre)s – Tienda Gamer"
+msgstr "%(nombre)s – Gamer Store"
+
+#: .\core\templates\core\producto_detalle.html:29
+msgid "Descripción:"
+msgstr "Description:"
+
+#: .\core\templates\core\producto_detalle.html:31
+msgid "Stock disponible:"
+msgstr "Available stock:"
+
+#: .\core\templates\core\producto_detalle.html:36
+msgid "Volver"
+msgstr "Back"
+
+#: .\core\views.py:130
+msgid "Factura del Pedido"
+msgstr "Order Invoice"
+
+#: .\core\views.py:131
+msgid "Fecha de creación"
+msgstr "Creation date"
+
+#: .\core\views.py:132
+msgid "Estado del Pedido"
+msgstr "Order Status"
+
+#: .\core\views.py:139
+msgid "Detalles de los Productos"
+msgstr "Product Details"
+
+#: .\core\views.py:143
+msgid "Producto      | Cantidad | Precio Unitario | Subtotal"
+msgstr "Product      | Quantity | Unit Price | Subtotal"
+
+#: .\core\views.py:158
+msgid "Total a Pagar"
+msgstr "Total to Pay"

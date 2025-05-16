@@ -1,19 +1,22 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load price_format %}
-{% block title %}🛒 Mi Carrito - Tienda Gamer{% endblock %}
+
+{% block title %}🛒 {% trans "Mi Carrito" %} - {% trans "Tienda Gamer" %}{% endblock %}
 
 {% block content %}
 <div class="container">
-    <h2 class="text-center">🛒 Mi Carrito</h2>
+    <h2 class="text-center">🛒 {% trans "Mi Carrito" %}</h2>
 
     {% if items %}
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio Unitario</th>
-                    <th>Subtotal</th>
+                    <th>{% trans "Producto" %}</th>
+                    <th>{% trans "Cantidad" %}</th>
+                    <th>{% trans "Precio Unitario" %}</th>
+                    <th>{% trans "Subtotal" %}</th>
+                    <th>{% trans "Acciones" %}</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,43 +27,60 @@
                     <td>${{ item.producto.precio|miles }}</td>
                     <td>${{ item.subtotal|miles }}</td>
                     <td>
-                        <a href="{% url 'eliminar_del_carrito' item.producto.id %}" class="btn btn-danger btn-sm">🗑 Eliminar</a>
+                        <a href="{% url 'eliminar_del_carrito' item.producto.id %}" class="btn btn-danger btn-sm">
+                            🗑 {% trans "Eliminar" %}
+                        </a>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <a href="{% url 'vaciar_carrito' %}" class="btn btn-danger mt-3">🗑 Vaciar Carrito</a>
+        <a href="{% url 'vaciar_carrito' %}" class="btn btn-danger mt-3">
+            🗑 {% trans "Vaciar Carrito" %}
+        </a>
 
-        <form method="post" action="{% url 'finalizar_compra' %}">
-    {% csrf_token %}
-    <!-- tabla de items existentes… -->
+        <form method="post" action="{% url 'finalizar_compra' %}" class="mt-3">
+            {% csrf_token %}
+            <div class="form-group">
+              <label>{% trans "Método de envío:" %}</label><br>
+              <label>
+                <input type="radio" name="metodo_envio" value="Tienda" checked>
+                {% trans "Recoger en tienda" %}
+              </label>
+              <label>
+                <input type="radio" name="metodo_envio" value="Domicilio">
+                {% trans "Envío a domicilio" %}
+              </label>
+            </div>
 
-    <div class="form-group">
-      <label>Método de envío:</label><br>
-      <label>
-        <input type="radio" name="metodo_envio" value="Tienda" checked>
-        Recoger en tienda
-      </label>
-      <label>
-        <input type="radio" name="metodo_envio" value="Domicilio">
-        Envío a domicilio
-      </label>
-    </div>
+            <div id="direccion-section" style="display:none;">
+              {% if user.profile.direccion %}
+                <p><strong>{% trans "Dirección:" %}</strong> {{ user.profile.direccion }}</p>
+              {% endif %}
+              <a class="btn btn-secondary"
+                href="{% url 'actualizar_direccion' %}?next=finalizar_compra">
+                {% if user.profile.direccion %}
+                  {% trans "Actualizar dirección" %}
+                {% else %}
+                  {% trans "Agregar dirección" %}
+                {% endif %}
+              </a>
+            </div>
 
-    <div id="direccion-section" style="display:none;">
-      {% if user.profile.direccion %}
-        <p><strong>Dirección:</strong> {{ user.profile.direccion }}</p>
-      {% endif %}
-      <a class="btn btn-secondary"
-        href="{% url 'actualizar_direccion' %}?next=finalizar_compra">
-        {% if user.profile.direccion %}Actualizar dirección{% else %}Agregar dirección{% endif %}
-      </a>
-    </div>
+            <button type="submit" class="btn btn-success mt-3">
+              💳 {% trans "Finalizar Compra" %}
+            </button>
+        </form>
 
-  <button type="submit" class="btn btn-success mt-3">💳 Finalizar Compra</button>
+        <h4 class="text-end">{% trans "Total:" %} ${{ total|miles }}</h4>
+    {% else %}
+        <p class="text-center text-muted">{% trans "Tu carrito está vacío." %}</p>
+    {% endif %}
 
-</form>
+    <a href="{% url 'home' %}" class="btn btn-primary mt-3">
+        🔙 {% trans "Seguir Comprando" %}
+    </a>
+</div>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -71,11 +91,4 @@
     }));
   });
 </script>
-        <h4 class="text-end">Total: ${{ total|miles}}</h4>
-    {% else %}
-        <p class="text-center text-muted">Tu carrito está vacío.</p>
-    {% endif %}
-
-  <a href="{% url 'home' %}" class="btn btn-primary">🔙 Seguir Comprando</a>
-</div>
 {% endblock %}

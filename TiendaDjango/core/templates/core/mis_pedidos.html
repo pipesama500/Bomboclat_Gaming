@@ -1,18 +1,20 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load price_format %}
-{% block title %}📝 Mis Pedidos{% endblock %}
+
+{% block title %}📝 {% trans "Mis Pedidos" %}{% endblock %}
 
 {% block content %}
 <div class="container">
-    <h2>📝 Mis Pedidos</h2>
+    <h2>📝 {% trans "Mis Pedidos" %}</h2>
     <table class="table table-striped mt-3">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Fecha</th>
-                <th>Total</th>
-                <th>Estado</th>
-                <th>Acciones</th>
+                <th>{% trans "ID" %}</th>
+                <th>{% trans "Fecha" %}</th>
+                <th>{% trans "Total" %}</th>
+                <th>{% trans "Estado" %}</th>
+                <th>{% trans "Acciones" %}</th>
             </tr>
         </thead>
         <tbody>
@@ -20,25 +22,25 @@
             <tr>
                 <td>{{ pedido.id }}</td>
                 <td>{{ pedido.fecha|date:"Y-m-d H:i" }}</td>
-                <td>${{ pedido.total|miles}}</td>
+                <td>{{ pedido.total|miles }}</td>
                 <td>{{ pedido.estado }}</td>
                 <td>
                     <a href="{% url 'generar_factura_pdf' pedido.id %}"
                        class="btn btn-sm btn-primary">
-                       📄 Factura
+                       {% trans "📄 Factura" %}
                     </a>
                 </td>
             </tr>
             {% empty %}
             <tr>
-                <td colspan="5" class="text-center">No tienes pedidos aún.</td>
+                <td colspan="5" class="text-center">{% trans "No tienes pedidos aún." %}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
     <a href="{% url 'home' %}" class="btn btn-secondary mt-3">
-        🏠 Volver al Inicio
+        🏠 {% trans "Volver al Inicio" %}
     </a>
 </div>
 {% endblock %}

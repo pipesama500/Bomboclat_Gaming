@@ -1,14 +1,34 @@
 {% extends "base.html" %}
-{% block title %}{% if producto %}Editar {{ producto.nombre }}{% else %}Crear Producto{% endif %}{% endblock %}
+{% load i18n %}
+
+{% block title %}
+  {% if producto %}
+    {% blocktrans with nombre=producto.nombre %}Editar {{ nombre }}{% endblocktrans %}
+  {% else %}
+    {% trans "Crear Producto" %}
+  {% endif %}
+{% endblock %}
 
 {% block content %}
-<h2>{% if producto %}✏️ Editar Producto{% else %}➕ Crear Producto{% endif %}</h2>
+<h2>
+  {% if producto %}
+    ✏️ {% trans "Editar Producto" %}
+  {% else %}
+    ➕ {% trans "Crear Producto" %}
+  {% endif %}
+</h2>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="btn btn-success mt-2">
-        {% if producto %}Actualizar{% else %}Guardar{% endif %}
+        {% if producto %}
+          {% trans "Actualizar" %}
+        {% else %}
+          {% trans "Guardar" %}
+        {% endif %}
     </button>
 </form>
-<a href="{% url 'admin_productos' %}" class="btn btn-secondary mt-2">Volver a Gestión de Productos</a>
+<a href="{% url 'admin_productos' %}" class="btn btn-secondary mt-2">
+  {% trans "Volver a Gestión de Productos" %}
+</a>
 {% endblock %}

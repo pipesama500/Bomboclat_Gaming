@@ -1,8 +1,22 @@
 {% extends "base.html" %}
-{% block title %}{% if producto %}Editar {{ producto.nombre }}{% else %}Crear Producto{% endif %}{% endblock %}
+{% load i18n %}
+
+{% block title %}
+  {% if producto %}
+    {% blocktrans with nombre=producto.nombre %}Editar {{ nombre }}{% endblocktrans %}
+  {% else %}
+    {% trans "Crear Producto" %}
+  {% endif %}
+{% endblock %}
 
 {% block content %}
-<h2>{% if producto %}✏️ Editar Producto{% else %}➕ Crear Producto{% endif %}</h2>
+<h2>
+  {% if producto %}
+    ✏️ {% trans "Editar Producto" %}
+  {% else %}
+    ➕ {% trans "Crear Producto" %}
+  {% endif %}
+</h2>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
@@ -10,7 +24,7 @@
     {# Preview de la imagen actual si existe #}
     {% if producto and producto.imagen %}
         <div class="mb-3">
-            <label class="form-label">Imagen actual:</label><br>
+            <label class="form-label">{% trans "Imagen actual:" %}</label><br>
             <img src="{{ producto.imagen.url }}"
                  alt="{{ producto.nombre }}"
                  style="max-height:150px; object-fit:contain; border:1px solid #ddd; padding:4px;">
@@ -18,9 +32,15 @@
     {% endif %}
 
     <button type="submit" class="btn btn-success mt-2">
-        {% if producto %}Actualizar{% else %}Guardar{% endif %}
+        {% if producto %}
+          {% trans "Actualizar" %}
+        {% else %}
+          {% trans "Guardar" %}
+        {% endif %}
     </button>
 </form>
 
-<a href="{% url 'admin_productos' %}" class="btn btn-secondary mt-2">Volver a Gestión de Productos</a>
+<a href="{% url 'admin_productos' %}" class="btn btn-secondary mt-2">
+  {% trans "Volver a Gestión de Productos" %}
+</a>
 {% endblock %}
