@@ -1,14 +1,33 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}{{ producto.nombre }} - Tienda Gamer{% endblock %}
+{% block title %}{{ producto.nombre }} – Tienda Gamer{% endblock %}
 
 {% block content %}
 <div class="container">
-    <h2>{{ producto.nombre }}</h2>
-    <p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
-    <p><strong>Precio:</strong> ${{ producto.precio }}</p>
-    <p><strong>Stock disponible:</strong> {{ producto.stock }}</p>
-    <a href="{% url 'agregar_al_carrito' producto.id %}" class="btn btn-success">🛒 Agregar al Carrito</a>
-    <a href="{% url 'home' %}" class="btn btn-secondary">🔙 Volver</a>
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <div style="width:100%; height:300px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+        {% if producto.imagen %}
+          <img src="{{ producto.imagen.url }}"
+               alt="{{ producto.nombre }}"
+               style="max-width:100%; max-height:100%; object-fit:contain;">
+        {% else %}
+          <img src="{% static 'images/logo.png' %}"
+               alt="Sin imagen"
+               style="max-width:100%; max-height:100%; object-fit:contain;">
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h2>{{ producto.nombre }}</h2>
+      <p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
+      <p><strong>Precio:</strong> ${{ producto.precio }}</p>
+      <p><strong>Stock disponible:</strong> {{ producto.stock }}</p>
+      <a href="{% url 'agregar_al_carrito' producto.id %}"
+         class="btn btn-success">🛒 Agregar al Carrito</a>
+      <a href="{% url 'home' %}" class="btn btn-secondary">🔙 Volver</a>
+    </div>
+  </div>
 </div>
 {% endblock %}

@@ -7,3 +7,7 @@ admin.site.register(Carrito)
 admin.site.register(CarritoProducto)
 admin.site.register(Pedido)
 admin.site.register(DetallePedido)
+
+
+class ProductoAdmin(admin.ModelAdmin):
+    list_display = ('nombre','precio','stock','imagen')
