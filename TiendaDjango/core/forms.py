@@ -6,7 +6,7 @@ from .models import Producto, Profile
 class ProductoForm(forms.ModelForm):
     class Meta:
         model = Producto
-        fields = ['nombre', 'descripcion', 'precio', 'stock', 'categoria']
+        fields = ['nombre', 'descripcion', 'precio', 'stock', 'categoria','imagen']
 
 # ————— Formulario de registro con dirección opcional —————
 class CustomUserCreationForm(UserCreationForm):

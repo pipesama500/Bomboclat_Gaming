@@ -276,16 +276,24 @@ def crear_producto(request):
 
 @staff_member_required
 def editar_producto(request, producto_id):
-    producto = Producto.objects.get(id=producto_id)
+    # 1) Traigo el producto o 404
+    producto = get_object_or_404(Producto, id=producto_id)
+
     if request.method == 'POST':
-        form = ProductoForm(request.POST, instance=producto)
+        # 2) Incluyo request.FILES para procesar el ImageField
+        form = ProductoForm(request.POST, request.FILES, instance=producto)
         if form.is_valid():
             form.save()
             return redirect('admin_productos')
     else:
         form = ProductoForm(instance=producto)
 
-    return render(request, 'admin_core/editar_producto.html', {'form': form, 'producto': producto})
+    return render(request,
+                  'admin_core/editar_producto.html',
+                  {
+                      'form': form,
+                      'producto': producto,
+                  })
 
 @staff_member_required
 def eliminar_producto(request, producto_id):
