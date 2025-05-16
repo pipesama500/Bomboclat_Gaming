@@ -1,16 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container">
-  <h2>Actualizar dirección de envío</h2>
+  <h2>Actualizar datos de envío</h2>
   <form method="post">
     {% csrf_token %}
-    <div class="form-group">
-      {{ form.direccion.label_tag }}
-      {{ form.direccion }}
-      {% if form.direccion.errors %}
-        <div class="text-danger">{{ form.direccion.errors }}</div>
-      {% endif %}
-    </div>
+    {{ form.direccion.label_tag }} {{ form.direccion }}<br>
+    {{ form.pais.label_tag }} {{ form.pais }}<br>
+    {{ form.municipio.label_tag }} {{ form.municipio }}<br>
+    {{ form.ciudad.label_tag }} {{ form.ciudad }}<br>
     <button type="submit" class="btn btn-primary mt-2">Guardar</button>
   </form>
 </div>

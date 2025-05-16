@@ -10,7 +10,7 @@ from django.http import FileResponse
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from .models import Producto, Carrito, CarritoProducto, Pedido, DetallePedido, Categoria
-from .forms import ProductoForm, CustomUserCreationForm, AddressForm
+from .forms import ProductoForm, CustomUserCreationForm, ProfileForm
 
 def home(request):
     categoria_id = request.GET.get('categoria')  # Filtrar por categoría
@@ -200,15 +200,14 @@ def registro_view(request):
 def actualizar_direccion(request):
     profile = request.user.profile
     if request.method == 'POST':
-        form = AddressForm(request.POST)
+        form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():
-            profile.direccion = form.cleaned_data['direccion']
-            profile.save()
+            form.save()
             # tras guardar, volvemos al flujo de compra o donde venga 'next'
             next_url = request.GET.get('next') or 'ver_carrito'
             return redirect(next_url)
     else:
-        form = AddressForm(initial={'direccion': profile.direccion})
+        form = ProfileForm(instance=profile)
 
     return render(request, 'core/actualizar_direccion.html', {'form': form})
 

@@ -64,6 +64,9 @@ class Pedido(models.Model):
 class Profile(models.Model):
     user      = models.OneToOneField(User, on_delete=models.CASCADE)
     direccion = models.CharField("Dirección de envío", max_length=255, blank=True)
+    pais      = models.CharField("País",      max_length=100, blank=True)
+    municipio = models.CharField("Municipio", max_length=100, blank=True)
+    ciudad    = models.CharField("Ciudad",    max_length=100, blank=True)
 
     def __str__(self):
         return f"Perfil de {self.user.username}"
